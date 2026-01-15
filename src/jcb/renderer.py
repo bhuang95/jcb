@@ -255,7 +255,12 @@ class Renderer():
                 obs_names = self.template_dict['observations']
 
                 # Get list of observations that have their filters replaced
-                obs_to_replace = replace_obs_filters_dict['observations']
+                if 'observations' not in replace_obs_filters_dict or \
+                    replace_obs_filters_dict['observations'] == 'all_observations' or \
+                    replace_obs_filters_dict['observations'] == ['all_observations']:
+                    obs_to_replace = obs_names
+                else:
+                    obs_to_replace = replace_obs_filters_dict['observations']
 
                 # New filter dictionary
                 new_filters = replace_obs_filters_dict.get('override_filters', {})
